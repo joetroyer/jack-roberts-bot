@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "installCommand": "npm install",
+  "env": {
+    "OPENROUTER_API_KEY": "@openrouter-api-key",
+    "PINECONE_API_KEY": "@pinecone-api-key",
+    "GEMINI_API_KEY": "@gemini-api-key"
+  }
+}
