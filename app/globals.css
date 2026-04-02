@@ -1,26 +1,220 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #09090b;
+  --foreground: #fafafa;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-zinc-925: #111113;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Smooth animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Panel card entrance animation */
+@keyframes panelCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-panel-card-in {
+  animation: panelCardIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Staggered delays for panel cards */
+.panel-card-delay-0 { animation-delay: 0ms; }
+.panel-card-delay-1 { animation-delay: 80ms; }
+.panel-card-delay-2 { animation-delay: 160ms; }
+.panel-card-delay-3 { animation-delay: 240ms; }
+.panel-card-delay-4 { animation-delay: 320ms; }
+
+/* Synthesis section slide-up */
+@keyframes synthesisIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-synthesis-in {
+  animation: synthesisIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Shimmer animation for skeleton loading */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #27272a 25%,
+    #3f3f46 50%,
+    #27272a 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Pulse glow for active selection */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Markdown rendering inside panel cards */
+.panel-markdown h1,
+.panel-markdown h2,
+.panel-markdown h3 {
+  font-weight: 600;
+  color: #fafafa;
+  margin-top: 0.75rem;
+  margin-bottom: 0.375rem;
+}
+
+.panel-markdown h1 { font-size: 1.1rem; }
+.panel-markdown h2 { font-size: 1rem; }
+.panel-markdown h3 { font-size: 0.9rem; }
+
+.panel-markdown p {
+  margin-bottom: 0.5rem;
+  line-height: 1.65;
+}
+
+.panel-markdown ul,
+.panel-markdown ol {
+  margin-left: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.panel-markdown ul { list-style-type: disc; }
+.panel-markdown ol { list-style-type: decimal; }
+
+.panel-markdown li {
+  margin-bottom: 0.25rem;
+  line-height: 1.55;
+}
+
+.panel-markdown strong {
+  font-weight: 600;
+  color: #e4e4e7;
+}
+
+.panel-markdown em {
+  font-style: italic;
+  color: #a1a1aa;
+}
+
+.panel-markdown code {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85em;
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+}
+
+.panel-markdown pre {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 0.75rem;
+  overflow-x: auto;
+  margin-bottom: 0.5rem;
+}
+
+.panel-markdown pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.panel-markdown blockquote {
+  border-left: 3px solid #7c3aed;
+  padding-left: 0.75rem;
+  margin-left: 0;
+  margin-bottom: 0.5rem;
+  color: #a1a1aa;
+  font-style: italic;
+}
+
+.panel-markdown a {
+  color: #8b5cf6;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.panel-markdown a:hover {
+  color: #a78bfa;
+}
+
+/* Textarea auto-resize helper */
+textarea {
+  scrollbar-width: thin;
+  scrollbar-color: #3f3f46 transparent;
 }
